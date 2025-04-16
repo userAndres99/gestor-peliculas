@@ -13,7 +13,9 @@ Este es un proyecto para gestionar películas y series, desarrollado con React y
 - **`index.css`**: 
 - **`package.json`**: 
 
-
+## LIBRERIA USADAS
+- **`lucide React`**: 
+para instalarla sobre el proyecto solo hay que usar "npm install lucide-react"
 ---------------------------------------------------------------------------------------------------------------------------------
 
 # React + Vite

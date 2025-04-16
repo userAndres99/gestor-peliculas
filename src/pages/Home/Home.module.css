@@ -1,6 +1,7 @@
 .home {
     text-align: center;
     padding: 20px;
+    padding-top: 80px; /* ajustá esto según el alto de tu header */
   }
   
   .home h1 {
