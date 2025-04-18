@@ -1,7 +1,7 @@
 .header {
   background-color: #222;
   color: white;
-  padding: 15px 30px;
+  padding: 0.5px 1px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,7 +9,7 @@
   top: 0;                 /* arribita */
   left: 0;                
   right: 0;               
-  width: 96%;            /* OCUPA TODO EL ANCHO (96 porque 100 no me gusto) */
+  width: 99%;            /* OCUPA TODO EL ANCHO (96 porque 100 no me gusto) */
   z-index: 1000;          /* ENCIMA DE TODO (por las dudas)*/
   box-shadow: 0 2px 4px rgba(0,0,0,0.4); /*una sombrita*/
 }

@@ -1,0 +1,32 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 500px;
+  padding: 1.5rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  margin-top: 10%;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #333;
+  color: #f5f5f5;
+}

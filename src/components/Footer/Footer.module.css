@@ -1,18 +1,13 @@
 .footer {
-  background-color: #222;          /* Color oscuro, igual que el header */
-  color: white;                    /* Letra blanca*/
-  text-align: center;              /* Centrado del texto */
-  padding: 15px;                   /* Espaciado dentro del footer */
-  position: fixed;                 /* para que este fijada al final */
-  bottom: 0;                       /* Pegado al fondo */
-  left: 0;                          /* Alineado a la izquierda */
-  right: 0;                         /* Alineado a la derecha */
-  width: 100%;                      /* para que use todo el ancho*/
-  font-size: 14px;                  /* Tamaño para letra */
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.2); /* Sombrita */
+  background-color: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.2);
+  margin-top: 40px;
+  position: relative;
+  left: 10%;
+  transform: translateX(-10%);
+  width: 100vw;
 }
-
-
-
-
-  

@@ -1,1 +1,36 @@
-/*idea de css*/
+.detalle {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  }
+  
+  .titulo {
+    margin-top: 0;
+  }
+  
+  .estado {
+    margin: 0.5rem 0;
+    font-weight: bold;
+  }
+  
+  .botones {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .botones button {
+    padding: 0.5rem 1rem;
+    background: #444;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .botones button:hover {
+    background: #555;
+  }
+  

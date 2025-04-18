@@ -1,14 +1,22 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 .home {
-    text-align: center;
-    padding: 20px;
-    padding-top: 80px; /* ajustá esto según el alto de tu header */
-  }
+  display: flex;
+  flex-direction: column; /*es para que el contenido se alinee verticalmente*/
+  min-height: 100vh;  /*para que ocupe toda la pantalla*/
+  padding-top: 70px;      
+  align-items: center;    
+  gap: 2rem;              /*para que haya espacio entre los elementos*/
+}
   
   .home h1 {
-    color: #333;
+    color: #ffffff;
   }
   
   .home p {
     font-size: 1.2em;
-    color: #666;
+    color: #ffffff;
   }
