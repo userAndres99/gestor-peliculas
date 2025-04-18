@@ -1,14 +1,22 @@
+// src/components/Input/Input.jsx
 import styles from './Input.module.css';
-//Value es el valor del input
-//onChange es la funcion que se ejecuta cuando cambia el valor del input
-const Input = ({onChange,value}) => {
 
-  const ManejadorCambio = (evento) => {
-    //console.log(evento.target.value);
-    onChange(evento.target.value);
-  }
+// name --> nombre del input (y tamb para id)
+// value --> valor del input
+// onChange --> función para manejar el cambio en el input
+// type --> tipo de input (por defecto 'text')
 
-  return <input className={styles.input} value={value} onChange={ManejadorCambio} />
-}
+const Input = ({ name, value, onChange, type = 'text' }) => {
+  return (
+    <input
+      className={styles.input}
+      name={name}
+      id={name}
+      type={type}
+      value={value}
+      onChange={onChange}        // lo que hay dentro del onChange es ------> ()=> onChange(event.target.value)
+    />
+  );
+};
 
 export default Input;
