@@ -68,6 +68,25 @@ const Home = () => {
     console.log('Editar', id);
   };
 
+
+  const [resultado, setResultado] = useState(null);
+
+  const buscarContenido = (val) =>{
+    const encontrado = vistos.find(item => item.titulo === val);
+    if(encontrado){
+      setResultado(encontrado || 'no encontrado')
+    }
+
+  
+
+    
+
+  }
+
+
+
+ 
+
   return (
     <div className={styles.home}>
 
@@ -76,6 +95,7 @@ const Home = () => {
         mostrarTodo={() => setVistaActual('todo')}
         mostrarPorVer={() => setVistaActual('porVer')}
         mostrarVistos={() => setVistaActual('vistos')}
+        buscarContenido={buscarContenido}
       />
 
       {/* Vista completa: formulario y ambas listas (en verdad voy a sacar ambas listas de aca para dejar solo el formulario...pero es para ir probando)*/}
@@ -127,9 +147,29 @@ const Home = () => {
         </>
       )}
 
+      {resultado ? (
+        resultado === 'No encontrado' ? (
+          <p>No se encontro resultado</p>
+        ): (
+          <div> 
+            <h3>Titulo encontrado:</h3>
+            <p>{resultado.titulo}</p>
+
+          </div>
+        )
+      ):null}
+
+
+
+    
+
       <Footer />
     </div>
   );
+  
+
+  
+
 };
 
 export default Home;
