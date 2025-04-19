@@ -1,30 +1,41 @@
 .header {
-  background-color: #222;
+  background-color: #0F0F0F ;
   color: white;
-  padding: 0.5px 1px;
-  display: flex;
-  justify-content: space-between;
+  padding:0;
+    display: flex;
+  /* justify-content: space-between; */
   align-items: center;
-  position: fixed;        
-  top: 0;                 /* arribita */
-  left: 0;                
-  right: 0;               
-  width: 99%;            /* OCUPA TODO EL ANCHO (96 porque 100 no me gusto) */
-  z-index: 1000;          /* ENCIMA DE TODO (por las dudas)*/
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4); /*una sombrita*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  /* gap: 20px; */
+  /* flex-wrap: wrap; para que en pantallas chicas no se rompa */
+  box-sizing: border-box;
 }
 
 .left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 50px;
 }
 
 .right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  flex-shrink: 0;
+  margin-right: 20px;
 }
-
-
-  

@@ -1,15 +1,19 @@
 html, body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+
 }
 
 .home {
   display: flex;
   flex-direction: column; /*es para que el contenido se alinee verticalmente*/
-  min-height: 100vh;  /*para que ocupe toda la pantalla*/
-  padding-top: 70px;      
   align-items: center;    
-  gap: 2rem;              /*para que haya espacio entre los elementos*/
+  gap: 2rem;     
+  min-height: calc(100vh - 70px); /* 70px es lo que mide tu header fijo */
+  padding-top: 70px; /* para evitar que el contenido quede escondido bajo el header */
+  box-sizing: border-box;         /*para que haya espacio entre los elementos*/
+  background-color: #141414 
 }
   
   .home h1 {

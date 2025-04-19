@@ -1,5 +1,5 @@
 .boton {
-    background-color: #4CAF50; 
+    background-color: #E50914; 
     border: none;
     color: white;
     padding: 10px 20px;
@@ -14,6 +14,6 @@
   }
   
   .boton:hover {
-    background-color: #45a049; /* Un verde un poco más oscuro al pasar el mouse */
+    background-color: #B00610; /* Un verde un poco más oscuro al pasar el mouse */
   }
   
