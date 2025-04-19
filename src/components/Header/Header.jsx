@@ -3,22 +3,23 @@ import Titulo from '../Titulo/Titulo';
 import Boton from '../Boton/Boton';
 import { Film, Eye, EyeOff } from 'lucide-react';
 
-const Header = () => {
+const Header = ({ mostrarVistos, mostrarPorVer, mostrarTodo }) => {
   return (
     <header className={styles.header}>
       <div className={styles.left}>
-        <Film size={32} />
+        <Film size={32} onClick={mostrarTodo} /> {/* puse para que el logo sea el "mostrar todo"*/}
         <Titulo text="Gestor de Películas y Series" />
       </div>
       <div className={styles.right}>
-        <Boton text={<><Eye size={18} /> Visto</>} onClick={() => console.log('Mostrar vistos')} />
-        <Boton text={<><EyeOff size={18} /> Por ver</>} onClick={() => console.log('Mostrar por ver')} />
+        <Boton text={<><Eye size={18} /> Visto</>} onClick={mostrarVistos} />
+        <Boton text={<><EyeOff size={18} /> Por ver</>} onClick={mostrarPorVer} />
       </div>
     </header>
   );
 };
 
 export default Header;
+
 
 
 
