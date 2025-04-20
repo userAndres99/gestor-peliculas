@@ -5,26 +5,31 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Formulario from '../../components/Formulario/Formulario';
 import ListarContenido from '../../components/ListaContenido/ListarContenido';
+import Filtro from '../../components/Filtro/Filtro';
 
 const Home = () => {
-  
   // Estado inicial de las listas: 'vistos' y 'porVer'
   // Se inicializan desde localStorage o como listas vacías
   const [vistos, setVistos] = useState(() => JSON.parse(localStorage.getItem('vistos')) || []);
   const [porVer, setPorVer] = useState(() => JSON.parse(localStorage.getItem('porVer')) || []);
 
   // Vista actual: 'todo', 'porVer' o 'vistos'
-  //todo ahora solo muestra el formulario
-  //porVer muestra solo los no vistos
-  //vistos muestra solo los vistos
+  // 'todo' muestra solo el formulario
+  // 'porVer' muestra solo los no vistos
+  // 'vistos' muestra solo los vistos
   const [vistaActual, setVistaActual] = useState('todo');
 
-  // Estado para almacenar el término de búsqueda y resultados
+  // Estados para búsqueda
+  // terminoBusqueda almacena el valor buscado
+  // resultado guarda los ítems encontrados o null
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
   const [resultado, setResultado] = useState(null);
 
+  // Estados para filtros de género y tipo
+  const [filtroGenero, setFiltroGenero] = useState('');
+  const [filtroTipo, setFiltroTipo] = useState('');
+
   // Guardar listas en localStorage al cambiar
-  // Se ejecuta cada vez que cambia la lista de vistos o porVer
   useEffect(() => {
     localStorage.setItem('vistos', JSON.stringify(vistos));
   }, [vistos]);
@@ -38,8 +43,7 @@ const Home = () => {
     else setPorVer(prev => [...prev, item]);
   };
 
-  // esto lo que hace es buscar en la lista de porVer y vistos
-  //val es el valor de búsqueda
+  // Función de búsqueda: guarda término y filtra ambas listas
   const buscarContenido = (val) => {
     setTerminoBusqueda(val);
     if (!val.trim()) {
@@ -54,14 +58,20 @@ const Home = () => {
   };
 
   // Actualizar resultados si cambian listas durante búsqueda activa
-  //esto me estaba dando porque cuando buscaba algo y lo cambiaba a porVer o visto no se actualizaba la lista
-  //por eso lo que hice fue que si hay un valor en la busqueda se actualiza la lista
   useEffect(() => {
     if (terminoBusqueda) buscarContenido(terminoBusqueda);
   }, [porVer, vistos]);
 
-  // toggleVista cambia el estado de un ítem entre visto y por ver
-  // el id es lo que es.... el id del ítem que se quiere cambiar
+  // Funcion para aplicar filtros de género y tipo a cualquier lista
+  // lista es la lista a filtrar (porVer o vistos)
+  // .filter lo puse para que fultre los resultados según el género y tipo 
+  const aplicarFiltros = (lista) => {
+    return lista
+      .filter(item => !filtroGenero || item.genero === filtroGenero)
+      .filter(item => !filtroTipo    || item.tipo   === filtroTipo);
+  };
+
+  // Alterna el estado visto/no visto moviendo el ítem entre listas
   const toggleVista = (id) => {
     const itemPorVer = porVer.find(i => i.id === id);
     if (itemPorVer) {
@@ -84,7 +94,7 @@ const Home = () => {
     }
   };
 
-  // Placeholder de editar
+  // TODAVIA FALTA HACER LA FUNCION DE EDITAR ITEM
   const editarItem = (id) => console.log('Editar', id);
 
   return (
@@ -98,13 +108,12 @@ const Home = () => {
       />
 
       {/*--------------------------------------- Si hay búsqueda activa, mostrar solo resultados---------------- */}
-      {/* supongo que debe hacer una mejor manera de hacerlo */}
-      { resultado ? (
+      {resultado ? (
         Array.isArray(resultado) ? (
           <>
             <h2 className={styles.tituloSeccion}>Resultados de búsqueda</h2>
             <ListarContenido
-              lista={resultado}
+              lista={aplicarFiltros(resultado)}
               onEditar={editarItem}
               onEliminar={eliminarItem}
               onToggleVista={toggleVista}
@@ -116,6 +125,14 @@ const Home = () => {
       ) : (
         /*---------------------------- Vista normal ---------------------------------------*/
         <>
+          {/* Filtros de género y tipo */}
+          <Filtro
+            genero={filtroGenero}
+            tipo={filtroTipo}
+            onChangeGenero={setFiltroGenero}
+            onChangeTipo={setFiltroTipo}
+          />
+
           {vistaActual === 'todo' && (
             <>
               <Formulario onSubmit={agregarItem} />
@@ -126,7 +143,7 @@ const Home = () => {
             <>
               <h2 className={styles.tituloSeccion}>Por Ver</h2>
               <ListarContenido
-                lista={porVer}
+                lista={aplicarFiltros(porVer)}
                 onEditar={editarItem}
                 onEliminar={eliminarItem}
                 onToggleVista={toggleVista}
@@ -138,7 +155,7 @@ const Home = () => {
             <>
               <h2 className={styles.tituloSeccion}>Vistos</h2>
               <ListarContenido
-                lista={vistos}
+                lista={aplicarFiltros(vistos)}
                 onEditar={editarItem}
                 onEliminar={eliminarItem}
                 onToggleVista={toggleVista}
@@ -148,6 +165,7 @@ const Home = () => {
         </>
       ) }
 
+      {/* Footer */}
       <Footer />
     </div>
   );
