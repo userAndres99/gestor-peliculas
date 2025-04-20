@@ -7,27 +7,24 @@ import Formulario from '../../components/Formulario/Formulario';
 import ListarContenido from '../../components/ListaContenido/ListarContenido';
 
 const Home = () => {
-  // Estados para almacenar los ítems separados: vistos y por ver
-  const [vistos, setVistos] = useState(() => {
-    const saved = localStorage.getItem('vistos');
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [porVer, setPorVer] = useState(() => {
-    const saved = localStorage.getItem('porVer');
-    return saved ? JSON.parse(saved) : [];
-  });
+  
+  // Estado inicial de las listas: 'vistos' y 'porVer'
+  // Se inicializan desde localStorage o como listas vacías
+  const [vistos, setVistos] = useState(() => JSON.parse(localStorage.getItem('vistos')) || []);
+  const [porVer, setPorVer] = useState(() => JSON.parse(localStorage.getItem('porVer')) || []);
 
-  // Estado para determinar qué vista mostrar: 'todo', 'porVer' o 'vistos'
-  // 'todo' muestra ambas listas y el formulario
-  // 'porVer' muestra solo la lista de "Por Ver"
-  // 'vistos' muestra solo la lista de "Vistos"
+  // Vista actual: 'todo', 'porVer' o 'vistos'
+  //todo ahora solo muestra el formulario
+  //porVer muestra solo los no vistos
+  //vistos muestra solo los vistos
   const [vistaActual, setVistaActual] = useState('todo');
 
   // Estado para almacenar el término de búsqueda y resultados
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
   const [resultado, setResultado] = useState(null);
 
-  // Sincroniza cada lista con localStorage cuando cambian
+  // Guardar listas en localStorage al cambiar
+  // Se ejecuta cada vez que cambia la lista de vistos o porVer
   useEffect(() => {
     localStorage.setItem('vistos', JSON.stringify(vistos));
   }, [vistos]);
@@ -35,16 +32,14 @@ const Home = () => {
     localStorage.setItem('porVer', JSON.stringify(porVer));
   }, [porVer]);
 
-  // Agrega un nuevo ítem a la lista que corresponda según su estado (visto/no visto)
+  // Agregar nuevo ítem según estado visto o no visto
   const agregarItem = (item) => {
-    if (item.visto) {
-      setVistos(prev => [...prev, item]);
-    } else {
-      setPorVer(prev => [...prev, item]);
-    }
+    if (item.visto) setVistos(prev => [...prev, item]);
+    else setPorVer(prev => [...prev, item]);
   };
 
-  // Función de búsqueda: guarda término y filtra ambas listas
+  // esto lo que hace es buscar en la lista de porVer y vistos
+  //val es el valor de búsqueda
   const buscarContenido = (val) => {
     setTerminoBusqueda(val);
     if (!val.trim()) {
@@ -58,105 +53,53 @@ const Home = () => {
     setResultado(encontrados.length ? encontrados : 'No encontrado');
   };
 
-  // Alterna el estado visto/no visto moviendo el ítem entre listas
-  // y refresca resultados si hay búsqueda activa
+  // Actualizar resultados si cambian listas durante búsqueda activa
+  //esto me estaba dando porque cuando buscaba algo y lo cambiaba a porVer o visto no se actualizaba la lista
+  //por eso lo que hice fue que si hay un valor en la busqueda se actualiza la lista
+  useEffect(() => {
+    if (terminoBusqueda) buscarContenido(terminoBusqueda);
+  }, [porVer, vistos]);
+
+  // toggleVista cambia el estado de un ítem entre visto y por ver
+  // el id es lo que es.... el id del ítem que se quiere cambiar
   const toggleVista = (id) => {
     const itemPorVer = porVer.find(i => i.id === id);
     if (itemPorVer) {
       setPorVer(prev => prev.filter(i => i.id !== id));
       setVistos(prev => [...prev, { ...itemPorVer, visto: true }]);
-
-      // Si hay un término de búsqueda activo, actualiza los resultados
-      // para que se refleje el cambio en la lista de resultados
-      if (terminoBusqueda) buscarContenido(terminoBusqueda);
       return;
     }
     const itemVisto = vistos.find(i => i.id === id);
     if (itemVisto) {
       setVistos(prev => prev.filter(i => i.id !== id));
       setPorVer(prev => [...prev, { ...itemVisto, visto: false }]);
-
-      // Si hay un término de búsqueda activo, actualiza los resultados
-      if (terminoBusqueda) buscarContenido(terminoBusqueda);
     }
   };
 
-  // Elimina un ítem de ambas listas y refresca búsqueda si hay término activo
+  // Eliminar ítem
   const eliminarItem = (id) => {
     if (window.confirm('¿Eliminar este contenido?')) {
       setVistos(prev => prev.filter(i => i.id !== id));
       setPorVer(prev => prev.filter(i => i.id !== id));
-      if (terminoBusqueda) buscarContenido(terminoBusqueda);
     }
   };
 
-  // este falta por implementar, pero es para editar un ítem
-  const editarItem = (id) => {
-    console.log('Editar', id);
-  };
+  // Placeholder de editar
+  const editarItem = (id) => console.log('Editar', id);
 
   return (
     <div className={styles.home}>
 
-      {/* Header con el logo y los botones de vista + búsqueda */}
       <Header
-        mostrarTodo={() => setVistaActual('todo')}
-        mostrarPorVer={() => setVistaActual('porVer')}
-        mostrarVistos={() => setVistaActual('vistos')}
+        mostrarTodo={() => { setVistaActual('todo'); setResultado(null); setTerminoBusqueda(''); }}
+        mostrarPorVer={() => { setVistaActual('porVer'); setResultado(null); setTerminoBusqueda(''); }}
+        mostrarVistos={() => { setVistaActual('vistos'); setResultado(null); setTerminoBusqueda(''); }}
         buscarContenido={buscarContenido}
       />
 
-      {/* Vista completa: formulario y ambas listas */}
-      {vistaActual === 'todo' && (
-        <>
-          <Formulario onSubmit={agregarItem} />
-
-          <h2 className={styles.tituloSeccion}>Por Ver</h2>
-          <ListarContenido
-            lista={porVer}
-            onEditar={editarItem}
-            onEliminar={eliminarItem}
-            onToggleVista={toggleVista}
-          />
-
-          <h2 className={styles.tituloSeccion}>Vistos</h2>
-          <ListarContenido
-            lista={vistos}
-            onEditar={editarItem}
-            onEliminar={eliminarItem}
-            onToggleVista={toggleVista}
-          />
-        </>
-      )}
-
-      {/* Solo lista "Por Ver" */}
-      {vistaActual === 'porVer' && (
-        <>
-          <h2 className={styles.tituloSeccion}>Por Ver</h2>
-          <ListarContenido
-            lista={porVer}
-            onEditar={editarItem}
-            onEliminar={eliminarItem}
-            onToggleVista={toggleVista}
-          />
-        </>
-      )}
-
-      {/* Solo lista "Vistos" */}
-      {vistaActual === 'vistos' && (
-        <>
-          <h2 className={styles.tituloSeccion}>Vistos</h2>
-          <ListarContenido
-            lista={vistos}
-            onEditar={editarItem}
-            onEliminar={eliminarItem}
-            onToggleVista={toggleVista}
-          />
-        </>
-      )}
-
-      {/* Resultados de búsqueda */}
-      {resultado && (
+      {/*--------------------------------------- Si hay búsqueda activa, mostrar solo resultados---------------- */}
+      {/* supongo que debe hacer una mejor manera de hacerlo */}
+      { resultado ? (
         Array.isArray(resultado) ? (
           <>
             <h2 className={styles.tituloSeccion}>Resultados de búsqueda</h2>
@@ -170,9 +113,41 @@ const Home = () => {
         ) : (
           <p className={styles.noEncontrado}>No se encontró ningún resultado.</p>
         )
-      )}
+      ) : (
+        /*---------------------------- Vista normal ---------------------------------------*/
+        <>
+          {vistaActual === 'todo' && (
+            <>
+              <Formulario onSubmit={agregarItem} />
+            </>
+          )}
 
-      {/* Footer con información de contacto */}
+          {vistaActual === 'porVer' && (
+            <>
+              <h2 className={styles.tituloSeccion}>Por Ver</h2>
+              <ListarContenido
+                lista={porVer}
+                onEditar={editarItem}
+                onEliminar={eliminarItem}
+                onToggleVista={toggleVista}
+              />
+            </>
+          )}
+
+          {vistaActual === 'vistos' && (
+            <>
+              <h2 className={styles.tituloSeccion}>Vistos</h2>
+              <ListarContenido
+                lista={vistos}
+                onEditar={editarItem}
+                onEliminar={eliminarItem}
+                onToggleVista={toggleVista}
+              />
+            </>
+          )}
+        </>
+      ) }
+
       <Footer />
     </div>
   );
