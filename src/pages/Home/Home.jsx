@@ -41,9 +41,10 @@ const Home = () => {
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
   const [resultado, setResultado] = useState(null);
 
-  // Estados para filtros de género y tipo
+  // Estados para filtros de género,tipo y orden(año o rating)
   const [filtroGenero, setFiltroGenero] = useState('');
   const [filtroTipo, setFiltroTipo] = useState('');
+  const [ordenSeleccionado, setOrdenSeleccionado] = useState('');
 
   // Guardar listas en localStorage al cambiar
   useEffect(() => {
@@ -81,10 +82,19 @@ const Home = () => {
   // Funcion para aplicar filtros de género y tipo a cualquier lista
   // lista es la lista a filtrar (porVer o vistos)
   // .filter lo puse para que fultre los resultados según el género y tipo 
-  const aplicarFiltros = (lista) => {
-    return lista
+  // agrego lo de ordenamiento para que se ordene según el año o rating
+  // .sort lo puse para que ordene los resultados según el año o rating
+  // .sort((a,b) => a.anio - b.anio) lo puse para que ordene los resultados según el año de menor a mayor
+  const aplicarFiltros = lista => {
+    let arr = lista
       .filter(item => !filtroGenero || item.genero === filtroGenero)
-      .filter(item => !filtroTipo    || item.tipo   === filtroTipo);
+      .filter(item => !filtroTipo   || item.tipo   === filtroTipo);
+    // Ordenamiento
+    if (ordenSeleccionado === 'anio-asc')   arr = [...arr].sort((a,b) => a.anio - b.anio);
+    if (ordenSeleccionado === 'anio-desc')  arr = [...arr].sort((a,b) => b.anio - a.anio);
+    if (ordenSeleccionado === 'rating-asc') arr = [...arr].sort((a,b) => a.rating - b.rating);
+    if (ordenSeleccionado === 'rating-desc')arr = [...arr].sort((a,b) => b.rating - a.rating);
+    return arr;
   };
 
   // Alterna el estado visto/no visto moviendo el ítem entre listas
@@ -141,12 +151,14 @@ const Home = () => {
       ) : (
         /*---------------------------- Vista normal ---------------------------------------*/
         <>
-          {/* Filtros de género y tipo */}
+          {/* Filtros de género,tipo,orden por año y rating */}
           <Filtro
             genero={filtroGenero}
             tipo={filtroTipo}
             onChangeGenero={setFiltroGenero}
             onChangeTipo={setFiltroTipo}
+            ordenSeleccionado={ordenSeleccionado}
+            onChangeOrden={setOrdenSeleccionado}
           />
 
           {vistaActual === 'todo' && (

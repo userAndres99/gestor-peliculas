@@ -1,7 +1,14 @@
 import React from 'react';
 import styles from './Filtro.module.css';
 
-const Filtro = ({ genero, tipo, onChangeGenero, onChangeTipo }) => {
+const Filtro = ({
+  genero,
+  tipo,
+  onChangeGenero,
+  onChangeTipo,
+  ordenSeleccionado,
+  onChangeOrden
+}) => {
   return (
     <div className={styles.filtro}>
       <div className={styles.campo}>
@@ -19,6 +26,7 @@ const Filtro = ({ genero, tipo, onChangeGenero, onChangeTipo }) => {
           <option value="Ciencia Ficción">Ciencia Ficción</option>
         </select>
       </div>
+
       <div className={styles.campo}>
         <label htmlFor="filtro-tipo">Tipo:</label>
         <select
@@ -29,6 +37,22 @@ const Filtro = ({ genero, tipo, onChangeGenero, onChangeTipo }) => {
           <option value="">Todos</option>
           <option value="película">Película</option>
           <option value="serie">Serie</option>
+        </select>
+      </div>
+
+      {/* Nuevo select de ordenamiento */}
+      <div className={styles.campo}>
+        <label htmlFor="filtro-orden">Ordenar por:</label>
+        <select
+          id="filtro-orden"
+          value={ordenSeleccionado}
+          onChange={e => onChangeOrden(e.target.value)}
+        >
+          <option value="">Ninguno</option>
+          <option value="anio-asc">Año ↑</option>
+          <option value="anio-desc">Año ↓</option>
+          <option value="rating-asc">Rating ↑</option>
+          <option value="rating-desc">Rating ↓</option>
         </select>
       </div>
     </div>
