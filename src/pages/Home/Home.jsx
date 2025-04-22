@@ -8,6 +8,7 @@ import ListarContenido from '../../components/ListaContenido/ListarContenido';
 import Filtro from '../../components/Filtro/Filtro';
 import contenidoPorDefecto from '../../datos/contenidoPorDefecto';
 import ContenidoEditar from '../../ContenidoEditar/ContenidoEditar';
+import Contador from '../../components/Contador/Contador';
 
 const Home = () => {
 
@@ -171,6 +172,8 @@ const Home = () => {
         buscarContenido={buscarContenido}
       />
 
+      <Contador vistos={vistos} porVer={porVer} />
+      
       {/*--------------------------------------- Si hay búsqueda activa, mostrar solo resultados---------------- */}
       {resultado ? (
         Array.isArray(resultado) ? (

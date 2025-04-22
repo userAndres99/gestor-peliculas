@@ -1,0 +1,21 @@
+.contador {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  .totales {
+    display: flex;
+    gap: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .generos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
