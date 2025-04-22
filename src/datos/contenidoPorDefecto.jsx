@@ -42,7 +42,7 @@ const contenidoPorDefecto = [
       tipo: "serie",
       rating: 10,
       visto: true,
-      imagenUrl: ""
+      imagenUrl: "https://es.web.img3.acsta.net/pictures/18/04/04/22/52/3191575.jpg"
     },
     {
       id: 5,
