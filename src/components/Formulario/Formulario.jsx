@@ -120,6 +120,11 @@ const Formulario = ({ onSubmit }) => {
           <option value="Drama">Drama</option>
           <option value="Terror">Terror</option>
           <option value="Ciencia Ficción">Ciencia Ficción</option>
+          <option value="Crimen">Crimen</option>
+          <option value="Misterio">Misterio</option>
+          <option value="Romance">Romance</option>
+          <option value="Fantasía">Fantasía</option>
+          <option value="Histórico">Histórico</option>
         </select>
       </div>
 
