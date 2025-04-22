@@ -7,6 +7,7 @@ import Formulario from '../../components/Formulario/Formulario';
 import ListarContenido from '../../components/ListaContenido/ListarContenido';
 import Filtro from '../../components/Filtro/Filtro';
 import contenidoPorDefecto from '../../datos/contenidoPorDefecto';
+import ContenidoEditar from '../../ContenidoEditar/ContenidoEditar';
 
 const Home = () => {
 
@@ -45,6 +46,9 @@ const Home = () => {
   const [filtroGenero, setFiltroGenero] = useState('');
   const [filtroTipo, setFiltroTipo] = useState('');
   const [ordenSeleccionado, setOrdenSeleccionado] = useState('');
+
+  // pelicula o serie que se esta editando
+  const [itemEditando, setItemEditando] = useState(null)
 
   // Guardar listas en localStorage al cambiar
   useEffect(() => {
@@ -122,7 +126,40 @@ const Home = () => {
   };
 
   // TODAVIA FALTA HACER LA FUNCION DE EDITAR ITEM
-  const editarItem = (id) => console.log('Editar', id);
+  const editarItem = (id) => {
+      const contenidoEncontrado =  
+      vistos.find(item => item.id === id) || 
+      porVer.find(item => item.id === id) 
+
+      if(contenidoEncontrado){
+        setItemEditando(contenidoEncontrado);
+        console.log("id", id)
+        console.log("Editar", contenidoEncontrado)
+      }else{
+        console.log("No se encontró")
+      }
+  };
+    
+  const guardarItemEditado = (itemEditado) =>{
+    const estaEnVistos = vistos.some(item => item.id === itemEditado.id)
+    const estaEnporVer = porVer.some(item => item.id === itemEditado.id)
+
+    if(estaEnVistos){
+      setVistos(prev => prev.map(item =>
+        item.id === itemEditado.id ? itemEditado : item
+      ));
+
+    }else if (estaEnporVer){
+      setPorVer(prev => prev.map(item =>
+        item.id === itemEditado.id ? itemEditado : item
+      ));
+    }
+    setItemEditando(null);
+  }
+  
+
+    
+    //console.log('Editar', id);
 
   return (
     <div className={styles.home}>
@@ -193,6 +230,17 @@ const Home = () => {
           )}
         </>
       ) }
+      {
+        itemEditando && (
+          <ContenidoEditar
+          item={itemEditando}
+          onGuardar ={guardarItemEditado}
+          onCancelar={() => setItemEditando(null)}
+          >
+
+          </ContenidoEditar>
+        )
+      }
 
       {/* Footer */}
       <Footer />
