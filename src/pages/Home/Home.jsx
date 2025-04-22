@@ -62,6 +62,7 @@ const Home = () => {
 
   // Función de búsqueda: guarda término y filtra ambas listas
   const buscarContenido = (val) => {
+    console.log(val)
     setTerminoBusqueda(val);
     if (!val.trim()) {
       setResultado(null);
@@ -69,7 +70,7 @@ const Home = () => {
     }
     const todas = [...porVer, ...vistos];
     const encontrados = todas.filter(item =>
-      item.titulo.toLowerCase().includes(val.toLowerCase())
+      item.titulo.toLowerCase().includes(val.toLowerCase()) || item.director.toLowerCase().includes(val.toLowerCase())
     );
     setResultado(encontrados.length ? encontrados : 'No encontrado');
   };
