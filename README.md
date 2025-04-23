@@ -13,6 +13,24 @@ Este es un proyecto para gestionar películas y series, desarrollado con React y
 - **`index.css`**: 
 - **`package.json`**: 
 
+## Index.js:
+Es el punto de entrada principal de la aplicacion React. Se encarga de renderizar el componente App en el DOM. Suele incluir
+configuraciones como el modo estricto (StrictMode), enrutamiento o integracion con librerias externas
+
+## App.js
+Es el componente principal de la aplicacion. Define la estructura general de la interfaz. Puede contener rutas, componentes hijos y lógica base del proyecto
+
+## index.css
+Contiene los estilos globales de la aplicacion. Se aplica a todos los componentes. Sirve para definir el diseño base, fuentes, margenes, etc.
+
+## Package.json
+Archivo clave para cualquier proyecto Node/React
+Contiene:
+-Nombre y version del proyecto
+-Dependencias (react,react-dom,etc)
+-Scripts (start,build,test,etc)
+-Configuraciones generales
+
 ## LIBRERIA USADAS
 - **`lucide React`**: 
 para instalarla sobre el proyecto solo hay que usar "npm install lucide-react"
