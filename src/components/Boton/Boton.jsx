@@ -1,11 +1,18 @@
-import styles from './Boton.module.css'; // Importa el archivo CSS para los estilos
+import React from "react";
+import styles from "./Boton.module.css";
 
-//el boton es un componente que recibe un texto y una funcion onClick
-//el text hace referencia al texto que se mostrara en el boton
-//la funcion onClick es la que se ejecutara al hacer clic en el boton
+const Boton = ({ text, onClick, variante, type = "button" }) => {
+    const estilosDisponibles = ["buscar","agregar","editar", "eliminar", "marcar", "desmarcar","primario", "secundario","home"];
+    const claseVariante = estilosDisponibles.includes(variante) ? styles[variante] : styles.secundario;
 
-const Boton = ({ text, onClick }) => {
-    return <button className={styles.boton} onClick={onClick} >{text}</button>;
+    return (
+        <button
+            type={type}
+            className={`${styles.boton} ${claseVariante}`}
+            onClick={onClick}
+        >
+            {text}
+        </button>
+    );
 };
-
 export default Boton;

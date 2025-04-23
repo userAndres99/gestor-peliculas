@@ -1,6 +1,7 @@
 // src/components/ContenidoEditar/ContenidoEditar.jsx
 import React, { useState } from 'react'
 import styles from './ContenidoEditar.module.css'
+import Boton from '../Boton/Boton'
 
 export default function ContenidoEditar({ item, onGuardar, onCancelar }) {
   const [titulo, setTitulo] = useState(item.titulo)
@@ -70,8 +71,8 @@ export default function ContenidoEditar({ item, onGuardar, onCancelar }) {
 
        
         <div className={styles.actions}>
-          <button onClick={handleSave}>Guardar</button>
-          <button onClick={onCancelar}>Cancelar</button>
+          <Boton text="Guardar" onClick={handleSave} variante={"secundario"}></Boton>
+          <Boton text="Cancelar" onClick={onCancelar}variante={"primario"} ></Boton>
         </div>
       </div>
     </div>

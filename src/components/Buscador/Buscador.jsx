@@ -4,6 +4,7 @@ import React from 'react'
 import { useState } from 'react'
 import Boton from '../Boton/Boton.jsx'
 import styles from './Buscador.module.css'
+import { Search } from 'lucide-react';
 
 export  function Buscador({buscarContenido}) {
 
@@ -33,7 +34,7 @@ export  function Buscador({buscarContenido}) {
     value={inputBuscador}
     onChange={manejarCambios}
   />
-  <Boton text="Buscar" type="submit" />
+  <Boton text={<div className='styles.search'><Search /> </div>} onClick={() => {}} variante={"buscar"} type="submit" />
 </form>
 
     </>

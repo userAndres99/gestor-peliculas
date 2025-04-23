@@ -17,19 +17,20 @@ const Filtro = ({
           id="filtro-genero"
           value={genero}
           onChange={e => onChangeGenero(e.target.value)}
+          className={styles.select}
         >
-          <option value="">Todos</option>
-          <option value="Accion">Acción</option>
-          <option value="Comedia">Comedia</option>
-          <option value="Drama">Drama</option>
-          <option value="Terror">Terror</option>
-          <option value="Ciencia Ficcion">Ciencia Ficción</option>
-          <option value="Crimen">Crimen</option>
-          <option value="Misterio">Misterio</option>
-          <option value="Romance">Romance</option>
-          <option value="Fantasia">Fantasía</option>
-          <option value="Historico">Histórico</option>
-          <option value="Suspenso">Suspenso</option>
+          <option value="" className={styles.option}>Todos</option>
+          <option value="Accion"className={styles.option}>Acción</option>
+          <option value="Comedia"className={styles.option}>Comedia</option>
+          <option value="Drama"className={styles.option}>Drama</option>
+          <option value="Terror"className={styles.option}>Terror</option>
+          <option value="Ciencia Ficcion"className={styles.option}>Ciencia Ficción</option>
+          <option value="Crimen"className={styles.option}>Crimen</option>
+          <option value="Misterio"className={styles.option}>Misterio</option>
+          <option value="Romance"className={styles.option}>Romance</option>
+          <option value="Fantasia"className={styles.option}>Fantasía</option>
+          <option value="Historico"className={styles.option}>Histórico</option>
+          <option value="Suspenso"className={styles.option}>Suspenso</option>
         </select>
       </div>
 
@@ -39,10 +40,12 @@ const Filtro = ({
           id="filtro-tipo"
           value={tipo}
           onChange={e => onChangeTipo(e.target.value)}
+          className={styles.select}
+
         >
-          <option value="">Todos</option>
-          <option value="película">Película</option>
-          <option value="serie">Serie</option>
+          <option value=""className={styles.option}>Todos</option>
+          <option value="película"className={styles.option}>Película</option>
+          <option value="serie"className={styles.option}>Serie</option>
         </select>
       </div>
 
@@ -53,12 +56,14 @@ const Filtro = ({
           id="filtro-orden"
           value={ordenSeleccionado}
           onChange={e => onChangeOrden(e.target.value)}
+                    className={styles.select}
+
         >
-          <option value="">Ninguno</option>
-          <option value="anio-asc">Año ↑</option>
-          <option value="anio-desc">Año ↓</option>
-          <option value="rating-asc">Rating ↑</option>
-          <option value="rating-desc">Rating ↓</option>
+          <option value=""className={styles.option}>Ninguno</option>
+          <option value="anio-asc"className={styles.option}>Año ↑</option>
+          <option value="anio-desc"className={styles.option}>Año ↓</option>
+          <option value="rating-asc"className={styles.option}>Rating ↑</option>
+          <option value="rating-desc"className={styles.option}>Rating ↓</option>
         </select>
       </div>
     </div>

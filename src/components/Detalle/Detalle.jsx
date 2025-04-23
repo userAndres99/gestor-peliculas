@@ -48,9 +48,11 @@ const Detalle = ({ item, onEditar, onEliminar, onToggleVista }) => {
         <Boton
           text={item.visto ? 'Marcar como no visto' : 'Marcar como visto'}
           onClick={() => onToggleVista(item.id)}
+          variante={item.visto ? "marcar" : "desmarcar"}
+          type="button"
         />
-        <Boton text="Editar" onClick={() => onEditar(item.id)} />
-        <Boton text="Eliminar" onClick={() => onEliminar(item.id)} />
+        <Boton text="Editar" onClick={() => onEditar(item.id)} variante={"editar"}  type="button"  />
+        <Boton text="Eliminar" onClick={() => onEliminar(item.id)}  variante={"eliminar"}  type="button"/>
       </div>
     </div>
   );

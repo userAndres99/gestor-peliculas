@@ -23,18 +23,9 @@
     margin-top: 1rem;
   }
   
-  .botones button {
-    padding: 0.5rem 1rem;
-    background: #444;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-  }
   
-  .botones button:hover {
-    background: #555;
-  }
+  
+ 
 
   .imagen {
     width: 100%;

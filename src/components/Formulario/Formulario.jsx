@@ -181,7 +181,7 @@ const Formulario = ({ onSubmit }) => {
       </div>
 
       {/* Botón para enviar el formulario */}
-      <Boton text="Agregar" type="submit" />
+      <Boton text="Agregar" onClick={() => {}} variante="agregar" type="submit" />
     </form>
   );
 };
