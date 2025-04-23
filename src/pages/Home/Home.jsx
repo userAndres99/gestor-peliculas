@@ -7,7 +7,7 @@ import Formulario from '../../components/Formulario/Formulario';
 import ListarContenido from '../../components/ListaContenido/ListarContenido';
 import Filtro from '../../components/Filtro/Filtro';
 import contenidoPorDefecto from '../../datos/contenidoPorDefecto';
-import ContenidoEditar from '../../ContenidoEditar/ContenidoEditar';
+import ContenidoEditar from '../../components/ContenidoEditar/ContenidoEditar'
 import Contador from '../../components/Contador/Contador';
 
 const Home = () => {
@@ -61,8 +61,10 @@ const Home = () => {
 
   // Agregar nuevo ítem según estado visto o no visto
   const agregarItem = (item) => {
+    if (window.confirm('¿Agregar este contenido?')) {
     if (item.visto) setVistos(prev => [...prev, item]);
     else setPorVer(prev => [...prev, item]);
+    }
   };
 
   // Función de búsqueda: guarda término y filtra ambas listas

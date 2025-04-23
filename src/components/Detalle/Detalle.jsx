@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from './Detalle.module.css';
 import Boton from '../Boton/Boton';
+import { CheckCircle, Clock } from 'lucide-react';
 
 /**
  * item          --> objeto con { id, titulo, director, anio, genero, tipo, rating, visto, imagenUrl }
@@ -31,7 +32,15 @@ const Detalle = ({ item, onEditar, onEliminar, onToggleVista }) => {
       <p><strong>Tipo:</strong> {item.tipo}</p>
       <p><strong>Rating:</strong> {item.rating}</p>
       <p className={styles.estado}>
-        {item.visto ? '✅ Visto' : '🔜 Por ver'}
+        {item.visto ? (
+          <>
+            <CheckCircle size={20} style={{ verticalAlign: 'middle' }} /> Visto
+          </>
+        ) : (
+          <>
+            <Clock size={20} style={{ verticalAlign: 'middle' }} /> Por ver
+          </>
+        )}
       </p>
 
       {/* Botones para editar, eliminar y marcar como visto y no visto */}
