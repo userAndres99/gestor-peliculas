@@ -115,16 +115,17 @@ const Formulario = ({ onSubmit }) => {
           onChange={handleChange}
         >
           <option value="">Seleccionar</option>
-          <option value="Acción">Acción</option>
+          <option value="Accion">Acción</option>
           <option value="Comedia">Comedia</option>
           <option value="Drama">Drama</option>
           <option value="Terror">Terror</option>
-          <option value="Ciencia Ficción">Ciencia Ficción</option>
+          <option value="Ciencia Ficcion">Ciencia Ficción</option>
           <option value="Crimen">Crimen</option>
           <option value="Misterio">Misterio</option>
           <option value="Romance">Romance</option>
-          <option value="Fantasía">Fantasía</option>
-          <option value="Histórico">Histórico</option>
+          <option value="Fantasia">Fantasía</option>
+          <option value="Historico">Histórico</option>
+          <option value="Suspenso">Suspenso</option>
         </select>
       </div>
 

@@ -1,87 +1,79 @@
+// src/components/ContenidoEditar/ContenidoEditar.jsx
 import React, { useState } from 'react'
+import styles from './ContenidoEditar.module.css'
 
-export default function ContenidoEditar({item,onGuardar,onCancelar}) {
+export default function ContenidoEditar({ item, onGuardar, onCancelar }) {
+  const [titulo, setTitulo] = useState(item.titulo)
+  const [director, setDirector] = useState(item.director)
+  const [anio, setAnio] = useState(item.anio)
+  const [genero, setGenero] = useState(item.genero)
+  const [tipo, setTipo] = useState(item.tipo)
+  const [rating, setRating] = useState(item.rating) 
 
-    const [titulo, setTitulo] = useState(item.titulo);
-    const [director, setDirector] = useState(item.director)
-    const [año, setAño] = useState(item.años)
-    const [genero, setGenero] = useState(item.genero)
-    const [tipo, setTipo] = useState(item.tipo)
-    const [rating, setRating] = useState(item.rating)
-
-    const handleSave = () => {
-        const itemEditado = {
-            ...item,
-            titulo,
-            director,
-            año,
-            genero,
-            tipo,
-            rating,
-
-
-        };
-        onGuardar(itemEditado);
+  const handleSave = () => {
+    const itemEditado = {
+      ...item,
+      titulo,
+      director,
+      anio,
+      genero,
+      tipo,
+      rating,
     }
-
-
-
-
-
-
-    
+    onGuardar(itemEditado)
+  }
 
   return (
-    <>
-      <h1>Editar: {titulo}</h1>
-      <label>Título:</label>
-      <input
-      type='text'
-      value={titulo}
-      onChange={(e) => setTitulo(e.target.value)}
-      ></input>
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
+        <h1>Editar: {titulo}</h1>
 
-      <label>Director:</label>
-      <input 
-      type="text"
-      value={director}
-      onChange={(e) => setDirector(e.target.value)} 
-      
-      />
+        <label>Título:</label>
+        <input type="text" value={titulo} onChange={e => setTitulo(e.target.value)} />
 
-      <label>Año:</label>
-      <input 
-      type="text" 
-      value={año}
-      onChange={(e) => setAño(e.target.value)}
-      />
+        <label>Director:</label>
+        <input type="text" value={director} onChange={e => setDirector(e.target.value)} />
 
+        <label>Año:</label>
+        <input type="text" value={anio} onChange={e => setAnio(e.target.value)} />
 
-      <label>Género:</label>
-      <select value={genero}
-      onChange={(e) => setGenero(e.target.value)}
-      >
-        <option value="">Seleccionar</option>
-        <option value="Accion">Acción</option>
-        <option value="Comedia">Comedia</option>
-        <option value="Drama">Drama</option>
-        <option value="Terror">Terror</option>
-        <option value="Ciencia Ficcion">Ciencia Ficción</option>
+        <label>Género:</label>
+        <select value={genero} onChange={e => setGenero(e.target.value)}>
+          <option value="">Seleccionar</option>
+          <option value="Accion">Acción</option>
+          <option value="Comedia">Comedia</option>
+          <option value="Drama">Drama</option>
+          <option value="Terror">Terror</option>
+          <option value="Ciencia Ficcion">Ciencia Ficción</option>
+          <option value="Crimen">Crimen</option>
+          <option value="Misterio">Misterio</option>
+          <option value="Romance">Romance</option>
+          <option value="Fantasia">Fantasía</option>
+          <option value="Historico">Histórico</option>
+          <option value="Suspenso">Suspenso</option>
+        </select>
 
+        <label>Tipo:</label>
+        <select value={tipo} onChange={e => setTipo(e.target.value)}>
+          <option value="pelicula">Película</option>
+          <option value="serie">Serie</option>
+        </select>
 
-      </select>
+        <label>Rating:</label>
+        <input
+          type="number"
+          min="1"
+          max="10"
+          value={rating}
+          onChange={e => setRating(e.target.value)}
+        />
 
-      <select value={tipo}
-      onChange={(e) => setTipo(e.target.value)}>
-
-        <option value="Pelicula">Pelicula</option>
-        <option value="Serie">Serie</option>
-      </select>
-      <input type="number" min ="1" max= "10"  value={rating}  onChange={(e) => setRating(e.target.value)}/>
-
-
-      <button onClick={handleSave}>Guardad</button>
-      <button onClick={onCancelar}>Cancelar</button>
-    </>
+       
+        <div className={styles.actions}>
+          <button onClick={handleSave}>Guardar</button>
+          <button onClick={onCancelar}>Cancelar</button>
+        </div>
+      </div>
+    </div>
   )
 }

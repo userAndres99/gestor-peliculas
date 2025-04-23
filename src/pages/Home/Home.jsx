@@ -233,17 +233,17 @@ const Home = () => {
           )}
         </>
       ) }
-      {
-        itemEditando && (
-          <ContenidoEditar
-          item={itemEditando}
-          onGuardar ={guardarItemEditado}
-          onCancelar={() => setItemEditando(null)}
-          >
-
-          </ContenidoEditar>
-        )
-      }
+      {/* El apartado del editado*/}
+      { itemEditando && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <ContenidoEditar
+            item={itemEditando}
+            onGuardar={guardarItemEditado}
+            onCancelar={() => setItemEditando(null)}/>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <Footer />

@@ -24,3 +24,28 @@ html, body {
     font-size: 1.2em;
     
   }
+
+  /* El “fondo” oscuro + blur */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* El contenedor blanco del formulario */
+.modalContent {
+  background: rgb(255, 255, 255);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
