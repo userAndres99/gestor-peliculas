@@ -1,3 +1,18 @@
+Correcciones:
+
+- Buena organizacion del proyecto, de las carpteas y el codigo.
+- Codigo bien componetizado
+- Buen uso de useEffect, useState y localStorage.
+- Cumple con todas las funcionalidades.
+- Responde bien la teoria
+
+Observaciones:
+- Yo soy de la filosofia del codigo autodocumentado: Si el codigo requiere un comentario para que se entienda,
+entonces no es un buen codigo. Creo que el de ustedes es un codigo de alta calidad, no necesita 
+comentarios en cada linea para que se explique que hace. Termina haciendo mas ruido que agregando valor.
+
+Nota: 10
+
 # Gestor de Películas y Series
 
 Este es un proyecto para gestionar películas y series, desarrollado con React y Vite.
